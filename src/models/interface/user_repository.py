@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class UserRepositoryInterface(ABC):
     
     @abstractmethod
-    def registry_user(self, username: str, password: str) -> dict: pass
+    def user_registry(self, username: str, password: str) -> None: pass
 
     @abstractmethod
     def list_users(self) -> list: pass
