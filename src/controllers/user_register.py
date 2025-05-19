@@ -20,7 +20,9 @@ class UserRegister:
 
     def __format_response(self,username: str) -> dict:
         return {
-            "type" : "user",
-            "count": 1,
-            "username": username
+            "data":{
+                "type" : "user",
+                "count": 1,
+                "username": username
+            }
         }
