@@ -5,7 +5,7 @@ class OrderRepository(OrderRepositoryInterface):
     def __init__(self, conn: Connection) -> None:
         self.__conn = conn
 
-    def order_registry(self, description: str, user_id: int) -> dict:
+    def order_registry(self, description: str, user_id: int) -> None:
         cursor = self.__conn.cursor()
         cursor.execute(
             """
