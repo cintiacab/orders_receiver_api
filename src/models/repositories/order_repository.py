@@ -22,7 +22,7 @@ class OrderRepository(OrderRepositoryInterface):
         cursor = self.__conn.cursor()
         cursor.execute(
             """
-            SELECT id, username, password
+            SELECT id, description, created_in, user_id
             FROM orders
             WHERE user_id = ?
             """, (user_id,)
