@@ -1,4 +1,4 @@
-from src.models.interface.user_repository import UserRepositoryInterface
+from src.models.repositories.interface.user_repository import UserRepositoryInterface
 from src.drivers.password_handler import PasswordHandler
 
 class UserRegister:
