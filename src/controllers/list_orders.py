@@ -1,6 +1,7 @@
 from src.models.repositories.interface.order_repository import OrderRepositoryInterface
+from .interfaces.list_orders import ListOrdersInteface
 
-class ListOrders:
+class ListOrders(ListOrdersInteface):
     def __init__(self, order_repository: OrderRepositoryInterface) -> None:
         self.__order_repository = order_repository
 

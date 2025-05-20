@@ -1,7 +1,8 @@
 from src.models.repositories.interface.order_repository import OrderRepositoryInterface
 from src.models.repositories.interface.user_repository import UserRepositoryInterface
+from .interfaces.order_register import OrderRegisterInterface
 
-class OrderRegister:
+class OrderRegister(OrderRegisterInterface):
     def __init__(self, order_repository: OrderRepositoryInterface, user_repository: UserRepositoryInterface) -> None:
         self.__order_repository = order_repository
         self.__user_repository = user_repository

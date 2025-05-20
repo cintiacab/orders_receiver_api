@@ -1,6 +1,7 @@
 from src.models.repositories.interface.user_repository import UserRepositoryInterface
+from .interfaces.list_users import ListUserInteface
 
-class ListUser:
+class ListUser(ListUserInteface):
     def __init__(self, user_repository: UserRepositoryInterface) -> None:
         self.__user_repository = user_repository
 
