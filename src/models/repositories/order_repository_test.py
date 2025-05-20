@@ -17,7 +17,7 @@ def test_registry_order():
 
     mock_connection = MockConnection()
     repo = OrderRepository(mock_connection)
-    repo.registry_order(description, user_id)
+    repo.order_registry(description, user_id)
 
     cursor = mock_connection.cursor.return_value
 

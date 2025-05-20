@@ -5,6 +5,7 @@ class MockCursor:
     def __init__(self) -> None:
         self.execute = Mock()
         self.fetchall = Mock()
+        self.fetchone = Mock()
 
 class MockConnection:
     def __init__(self) -> None:
@@ -17,7 +18,7 @@ def test_registry_user():
 
     mock_connection = MockConnection()
     repo = UserRepository(mock_connection)
-    repo.registry_user(username, password)
+    repo.user_registry(username, password)
 
     cursor = mock_connection.cursor.return_value
 
@@ -36,3 +37,18 @@ def test_list_users():
     assert "SELECT id, username, password" in cursor.execute.call_args[0][0]
     assert "FROM users" in cursor.execute.call_args[0][0]
     cursor.fetchall.assert_called_once()
+
+def test_get_user_by_username():
+    username = "user1"
+
+    mock_connection = MockConnection()
+    repo = UserRepository(mock_connection)
+    repo.get_user_by_username(username)
+
+    cursor = mock_connection.cursor.return_value
+
+    assert "SELECT id, username, password" in cursor.execute.call_args[0][0]
+    assert "FROM users" in cursor.execute.call_args[0][0]
+    assert "WHERE username = ?" in cursor.execute.call_args[0][0]
+    assert cursor.execute.call_args[0][1] == ("user1",)
+    cursor.fetchone.assert_called_once()

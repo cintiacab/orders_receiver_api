@@ -1,11 +1,11 @@
 from sqlite3 import Connection
-from src.models.interface.order_repository import OrderRepositoryInterface
+from src.models.repositories.interface.order_repository import OrderRepositoryInterface
 
 class OrderRepository(OrderRepositoryInterface):
     def __init__(self, conn: Connection) -> None:
         self.__conn = conn
 
-    def registry_order(self, description: str, user_id: int) -> dict:
+    def order_registry(self, description: str, user_id: int) -> dict:
         cursor = self.__conn.cursor()
         cursor.execute(
             """
