@@ -2,6 +2,8 @@ from src.models.repositories.interface.user_repository import UserRepositoryInte
 from src.drivers.password_handler import PasswordHandler
 from src.drivers.jwt_handler import JwtHandler
 from .interfaces.login_enabler import LoginEnablerInterface
+from src.errors.errors_types.http_not_found_error import HttpNotFound
+from src.errors.errors_types.http_bad_request_error import HttpBadRequest
 
 class LoginEnabler(LoginEnablerInterface):
     def __init__(self, user_repository: UserRepositoryInterface) -> None:
@@ -21,13 +23,13 @@ class LoginEnabler(LoginEnablerInterface):
     def __get_user(self, username: str) -> tuple:
         user = self.__user_repository.get_user_by_username(username)
         if not user: 
-            raise Exception("User not found")
+            raise HttpNotFound("User not found")
         return user
 
     def __check_password(self, password: str, hashed_password: str) -> None:
         correct_pw = self.__password_handler.check_password(password, hashed_password)
         if not correct_pw:
-            raise Exception("Wrong pasword")
+            raise HttpBadRequest("Wrong password")
         
     def __create_token(self, user_id:int, username: str) -> str:
         body = {"user_id": user_id, "username": username}

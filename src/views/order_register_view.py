@@ -1,6 +1,7 @@
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 from src.controllers.interfaces.order_register import OrderRegisterInterface
+from src.errors.errors_types.http_bad_request_error import HttpBadRequest
 
 class OrderRegisterView:
     def __init__(self, controller: OrderRegisterInterface) -> None:
@@ -19,4 +20,4 @@ class OrderRegisterView:
             or not isinstance (description, str)
             or int(header_id) != int(user_id)
         ): 
-            raise Exception("Invalid Input")
+            raise HttpBadRequest("Invalid Input")

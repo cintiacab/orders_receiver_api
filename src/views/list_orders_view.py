@@ -1,6 +1,7 @@
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 from src.controllers.interfaces.list_orders import ListOrdersInteface
+from src.errors.errors_types.http_bad_request_error import HttpBadRequest
 
 class ListOrdersView:
     def __init__(self, controller: ListOrdersInteface) -> None:
@@ -15,4 +16,4 @@ class ListOrdersView:
     
     def __validate_input(self, user_id: any, header_id: any)  -> None:
         if int(header_id) != int(user_id):
-            raise Exception("Invalid Input")
+            raise HttpBadRequest("Invalid Input")

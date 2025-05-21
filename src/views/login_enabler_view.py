@@ -1,6 +1,7 @@
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 from src.controllers.interfaces.login_enabler import LoginEnablerInterface
+from src.errors.errors_types.http_bad_request_error import HttpBadRequest
 
 class LoginEnablerView:
     def __init__(self, controller: LoginEnablerInterface) -> None:
@@ -18,4 +19,4 @@ class LoginEnablerView:
             not username or not password
             or not isinstance(username, str)
             or not isinstance(password, str)
-        ): raise Exception("Invalid Input")
+        ): raise HttpBadRequest("Invalid Input")
