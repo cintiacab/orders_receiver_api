@@ -5,7 +5,7 @@ class ListUser(ListUserInteface):
     def __init__(self, user_repository: UserRepositoryInterface) -> None:
         self.__user_repository = user_repository
 
-    def list_all(self) -> list:
+    def list_all(self) -> dict:
         users = self.__get_users()
         return self.__format_response(users)
 

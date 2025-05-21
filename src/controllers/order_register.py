@@ -8,17 +8,9 @@ class OrderRegister(OrderRegisterInterface):
         self.__user_repository = user_repository
 
     def registry(self, user_id: int, description: str) -> dict:
-        self.__validate_data(description, user_id)
         self.__validate_user(user_id)
         self.__register_new_order(description, user_id)
         return self.__format_response(description)
-
-    def __validate_data(self, description: any, user_id: any) -> None:
-        if (not description or not user_id
-            or not isinstance (description, str)
-            or not isinstance (user_id, int)
-        ): 
-            raise Exception("Invalid Input")
         
     def __validate_user(self, user_id: str) -> None:
         user = self.__user_repository.get_user_by_id(user_id)

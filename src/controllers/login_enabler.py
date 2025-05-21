@@ -16,7 +16,7 @@ class LoginEnabler(LoginEnablerInterface):
         hashed_password = user[2]
         self.__check_password(password, hashed_password)
         token = self.__create_token(user_id, username)
-        return self.__format_response(username, token)      
+        return self.__format_response(username, token)
 
     def __get_user(self, username: str) -> tuple:
         user = self.__user_repository.get_user_by_username(username)
