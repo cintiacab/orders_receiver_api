@@ -7,15 +7,16 @@ class OrderRegisterView:
         self.__controller = controller
 
     def handle(self, http_request: HttpRequest) -> HttpResponse:
-        user_id = http_request.headers.get("user_id")
         description = http_request.body.get("description")
-        self.__validate_input(user_id, description)
+        user_id = http_request.params.get("user_id")
+        header_id = http_request.headers.get("uid")
+        self.__validate_input(user_id, description, header_id)
         response = self.__controller.registry(user_id, description)
         return HttpResponse(body=response, status_code=201)
 
-    def __validate_input(self, user_id: any, description: any)  -> None:
+    def __validate_input(self, user_id: any, description: any, header_id: any)  -> None:
         if (not user_id or not description
-            or not isinstance (user_id, int)
             or not isinstance (description, str)
+            or int(header_id) != int(user_id)
         ): 
             raise Exception("Invalid Input")

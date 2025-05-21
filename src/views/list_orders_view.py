@@ -7,6 +7,12 @@ class ListOrdersView:
         self.__controller = controller
 
     def handle(self, http_request: HttpRequest) -> HttpResponse:
-        user_id = http_request.headers.get("user_id")
+        user_id = http_request.params.get("user_id")
+        header_id = http_request.headers.get("uid")
+        self.__validate_input(user_id, header_id)
         response = self.__controller.list_orders(user_id)
         return HttpResponse(body= response, status_code= 200)
+    
+    def __validate_input(self, user_id: any, header_id: any)  -> None:
+        if int(header_id) != int(user_id):
+            raise Exception("Invalid Input")

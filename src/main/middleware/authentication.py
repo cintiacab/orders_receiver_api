@@ -3,8 +3,8 @@ from src.drivers.jwt_handler import JwtHandler
 
 def jwt_auth_verification():
     jwt_handler = JwtHandler()
-    bearer_token = request.headers("Authorization")
-    user_id = request.headers("user_id")
+    bearer_token = request.headers.get("Authorization")
+    user_id = request.headers.get("uid")
 
     if not bearer_token or not user_id:
         raise Exception("Invalid authentication input")
